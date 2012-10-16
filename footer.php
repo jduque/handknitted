@@ -26,7 +26,7 @@
   <script src="<?php bloginfo('template_url');?>/js/script.js" type="text/javascript"></script> 
   <script src="<?php bloginfo('template_url');?>/js/exampleCollection.js" type="text/javascript"></script>  
   <script src="<?php bloginfo('template_url');?>/js/examplePagesCollection.js" type="text/javascript"></script>  
-  <!--<script src="<?php //echo get_permalink(74)."&idCategory=7"; ?>" type="text/javascript"></script>   -->
+  <script src="<?php //echo get_permalink(74)."&idCategory=7"; ?>" type="text/javascript"></script>
   <script src="<?php bloginfo('template_url');?>/js/exampleMain.js" type="text/javascript"></script>  
   
   <script>
