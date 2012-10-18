@@ -5,16 +5,27 @@ var pagesCollection = Backbone.Collection.extend({ // colección de modelos
 var pags = new pagesCollection(
 [
   {
-    "page": {
-          "ID": "",
-          "theTitle": "",
-          "theContent": "",
-          "image": {
-              "src": "",
-              "width": 0,
-              "height": 0
-          }
-    }
+    "ID": "",
+    "theTitle": "",
+    "theContent": "",
+    "slug": "",
+    "image": {
+        "src": "",
+        "width": 0,
+        "height": 0
+    },
+    "slides" : [
+      {
+        "background" : [
+          "url",
+          320, //width
+          240 //height
+        ],
+        "link" : "",
+        "text_link": "",
+        "video": ""
+      }
+    ]
   }
 ]
 );

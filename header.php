@@ -68,8 +68,8 @@
 					<h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
 				</hgroup>
 				
-				<nav id="utility" role="article">
-					<?php wp_nav_menu( array( 'theme_location' => 'utility' ) ); ?>
+				<!--<nav id="utility" role="article">
+					<?php //wp_nav_menu( array( 'theme_location' => 'utility' ) ); ?>
 				</nav><!-- #utility -->
 	
 				<nav id="access" role="article">
