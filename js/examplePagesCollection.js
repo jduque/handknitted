@@ -2,7 +2,7 @@ var page = Backbone.Model.extend({}); //modelo
 var pagesCollection = Backbone.Collection.extend({ // colección de modelos
   model: page
 });
-var pags = new pagesCollection(
+var homeJSon = new pagesCollection(
 [
   {
     "ID": "",
@@ -29,3 +29,4 @@ var pags = new pagesCollection(
   }
 ]
 );
+var pageModel = new pagesCollection([]);

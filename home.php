@@ -23,34 +23,7 @@
 
 <!-- *************** HOME *********************************************************** -->
 <script type="text/html" id="home-template">
-  <div id="slides">
-    <div class="slides_container">
-        <%
-          cont = 0;
-          length = pags.at(0).attributes.slides.length;
-          thisSlides = pags.at(0).attributes.slides;
-          _.each(thisSlides, function(slide){ 
-            cont++;
-            if(cont == length){this_class = "content last";}
-            else{this_class = "content"}
-            %>
-            <div class="<%= this_class %>">
-              <img src="<%=  slide.background[0] %>" style="width: <%=  slide.background[1] %>px;height: <%=  slide.background[2] %>px;" alt="" class=""/>
-              <a href="<%= slide.link %>" class="" >
-                <%= slide.text_link %>
-              </a>
-              <%= slide.video %>
-            </div>
-          <% }); %> <!-- END _.each -->
-    </div>
-    <div id="primary">
-			<div id="content">
-
-				
-
-			</div><!-- #content -->
-		</div><!-- #primary -->
-  </div>
+  
 </script>
 
 <!-- *************** INDEX ******************************************************** -->
@@ -59,7 +32,7 @@
     <?php wp_nav_menu( array ("container" => false) ); ?>
     <div class="gallery_header menu_header_index">
       
-      <h4 class="title">Fotografía de la naturaleza<br /> y documental</h4>
+      <h4 class="title"></h4>
     </div>
     <!--<center>-->
       <ul class="main-nav span3">
@@ -117,63 +90,73 @@
   </div>
 </script>
 
-<!-- *************** DEFAULT ******************************************************* -->
-<script type="text/html" id="default-template">
-  <div class="default_container span12">
-    <%      
-      thisPages = pags.at(6).attributes.pages;
-      if(thisPages[0].slug == ""){ %>      
-        <nav class="page_nav">You are here - <span><%= pags.at(6).attributes.title %></span></nav>
-        <div class="content span8">
-          <div class="inner_content <%= pags.at(6).attributes.slug %> row">
-            <div class="title span7"><%= pags.at(6).attributes.title %></div>
-            <div class="bigtext span7"><h1><%= pags.at(6).attributes.bigText %></h1></div>
-            <div class="leftp span3"><p><%= pags.at(6).attributes.leftParagraph %></p></div>
-            <% if(pags.at(6).attributes.awards!=""){ %>
-              <div class="awards span2">
-                <h3>awards</h3><ul><li><%= pags.at(6).attributes.awards %></li></ul>
-              </div>
-            <% } 
-            if(pags.at(6).attributes.socialnet!=""){ %>
-              <div class="socialnet span2">
-                <h3>socialnet</h3><ul><li><%= pags.at(6).attributes.socialnet %></li></ul>
-              </div>
-            <% } %>
+<!-- *************** PAGE ******************************************************* -->
+<script type="text/html" id="page-template">
+    <!--
+    /* *** please note *** */
+    /*
+      <% pageModel.at(0).attributes; %> // Call all current JSon data
+      <% pageModel.at(0).attributes.customName; %> //example custom, where customName is the name of the custom field 
+    */
+    -->
+<div class="page_container">
+    <%
+      thisPages = pageModel.at(0).attributes;
+      if(thisPages.pages[0].slug == ""){ %>      
+        <nav class="page_nav">You are here - <span><%= pageModel.at(0).attributes.title %></span></nav>
+        <div class="content">
+          <div class="inner_content <%= pageModel.at(0).attributes.slug %> row">
+            <h2 class="title"><%= pageModel.at(0).attributes.title %></h2>
+            <div class="page_content">
+              <%= pageModel.at(0).attributes.content %>
+              <%= pageModel.at(0).attributes.search %>
+            </div>
+            <!-- BEGIN show all custom fields -->
+            <% 
+              customField = pageModel.at(0).attributes.custom;
+              cont=0;
+              for(customName in customField){
+                if(cont>2){ %>
+                  <div class="custom <%= customName %>"><%= customField[customName] %></div>
+                <% }
+                cont++;
+              } %> <!-- END for -->
+            <!-- END show all custom fields -->
           </div>
         </div>
       <%  
       }
       else{
     %>
-      <nav class="page_nav">You are here - <%= pags.at(6).attributes.title %> - <span><%= pags.at(6).attributes.pages[0].title %></span></nav>
-      <div class="vertical_nav span3">
-        <h1 class="span4"><%= get("title") %></h1>
+      <nav class="page_nav">You are here - <%= pageModel.at(0).attributes.title %> - <span><%= pageModel.at(0).attributes.pages[0].title %></span></nav>
+      <div class="vertical_nav">
+        <h1 class="subpage_parent_title"><%= pageModel.at(0).attributes.title %></h1>
         <div class="menu">
-        <nav class="top_arrow span2" ><a href="" class="">top</a></nav>
-          <ul class="nav_services span4">
-          <% _.each(thisPages, function(page){ %>
-              <li><a href="#" class="<%= page.slug %>"><%= page.title %></a></li>
+        <nav class="top_arrow" ><a href="" class="">top</a></nav>
+          <ul class="nav_ul">
+          <% _.each(thisPages.pages, function(page){ %>
+              <li><a href="#<%= page.subpageId %>" class="<%= page.slug %>"><%= page.title %></a></li>
           <% });  %>  <!-- END _.each -->
           </ul>
-          <nav class="bottom_arrow span2"><a href="" class="">bottom</a></nav>
+          <nav class="bottom_arrow"><a href="" class="">bottom</a></nav>
         </div>
       </div>  
-      <% _.each(thisPages, function(thisPage){ %>
-        <div class=" span8">
+      <% _.each(thisPages.pages, function(thisPage){ %>
+        <div class="">
           <div class="inner_content <%= thisPage.slug %> row">
-            <div class="title span7"><%= thisPage.title %></div>
-            <div class="bigtext span7"><h1><%= thisPage.bigText %></h1></div>
-            <div class="leftp span3"><p><%= thisPage.leftParagraph %></p></div>
-            <% if(thisPage.awards!=""){ %>
-              <div class="awards span2">
-                <h3>awards</h3><ul><li><%= thisPage.awards %></li></ul>
-              </div>
-            <% } 
-            if(thisPage.socialnet!=""){ %>
-              <div class="socialnet span2">
-                <h3>socialnet</h3><ul><li><%= thisPage.socialnet %></li></ul>
-              </div>
-            <% } %>
+            <h2 class="subpage_title"><%= thisPage.title %></h2>
+            <div class="content_subpage"><%= thisPage.content %></div>
+            <!-- BEGIN show all custom fields -->
+            <% 
+              customField = thisPage.custom;
+              cont=0;
+              for(customName in customField){
+                if(cont>2){ %>
+                  <div class="custom <%= customName %>"><%= customField[customName] %></div>                 
+                <% }
+                cont++;
+              } %> <!-- END for -->
+            <!-- END show all custom fields -->
           </div>
         </div>
       <% });  %> <!-- END _.each -->
