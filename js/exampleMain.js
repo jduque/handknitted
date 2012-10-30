@@ -23,14 +23,42 @@ $(function(){
         /* *** END root right direction menu *** */
       /* *** END active lang *** */
     },
-    singleUrl: function(){      
+    singleUrl: function(){
       var $aElementSingle = $('a[rel="bookmark"]');
       var newHref = "";
         $aElementSingle.each(function(){
           newHref = $(this).attr('href').replace(/[^0-9]/g,'');
           $(this).attr('href', '#single/'+newHref);
         });
+    },
+    searchRoute: function($input, e){
+      var $inputTextSearch = $input;
+      var $inputTextSearchValue;
+      e.preventDefault();
+      $inputTextSearchValue = $inputTextSearch.attr('value');
+      app_router.navigate('#search/'+$inputTextSearchValue, {trigger: true, replace: false});
+    },
+    searchActions: function(){
+      var $inputTextSearch = $('input#s');
+      var $searchSubmit = $('input#searchsubmit');
+      var that = this;
+      $searchSubmit.click(function(e){
+        that.searchRoute($(this).prev(), e);
+      });
+      $inputTextSearch.bind('keypress', function(e){
+        if (e.keyCode == '13'){
+          that.searchRoute($(this), e);
+        }
+      });
+    },
+    /* *** BEGIN helper to make a valid JSon *** */
+    fixToValidJSon: function($jqueryObj){
+      var jqueryObjString = $("<div>").append($jqueryObj.clone()).html().replace(/"/g,"'");
+      jqueryObjString = jqueryObjString.replace( /(\t)/g,"");
+      jqueryObjString = jqueryObjString.replace( /(\n)/g,"");
+      return jqueryObjString;
     }
+    /* *** END helper to make a valid JSon *** */
   });
   /* VIEWS */
     var HomeView = Backbone.View.extend({
@@ -55,28 +83,32 @@ $(function(){
         $("body").addClass('home');
         var that = this;
         /* *** BEGIN model replaces wordpress's information  *** */
-        var home;
-        if($('#primary').length==0){
+        var parseHome;
+        var $primary = $('#primary');
+        var $mainDivMaincontent = $('#main div.maincontent');
+        if($primary.length==0){
           $.ajax({
             url: '?ajax=true', // *+++++++++* Call the right page to return the JSon *+++++++++*
             beforeSend : function(){ // *+++++++++* Create loading function *+++++++++*
               //$('#some').css({'background': 'url(wp-content/themes/handknitted/img/ajax-loader.gif) no-repeat 5px center'});
             }, 
             success: function(data){ // *+++++++++* New model with the return data *+++++++++*
-              home = $.parseJSON(data);
-              homeJSon = new pagesCollection([home]);
+              parseHome = $.parseJSON(data);
+              homeJSon = new pagesCollection([parseHome]);
               //console.log(homeJSon);
               that.$el.append(that.template(homeJSon));
               that.animateSection();
               that.mainMenu();
               that.singleUrl();
+              that.searchActions();
+              $mainDivMaincontent.hide();
               //app_router.navigate('index.php?ajax=false', {trigger: true, replace: false});
             }
           });
         }
         else{
-          $('#primary').show();
-          $('#main div.maincontent').hide();
+          $primary.show();
+          $mainDivMaincontent.hide();
         }
         /* *** END model replaces wordpress's information  *** */
         return this;
@@ -353,11 +385,12 @@ $(function(){
               that.animateSection(pageId);
               that.mainMenu();
               that.singleUrl();
-              /* ** BEGIN add wordpress's classes, of course ** */                
+              that.searchActions();
+              /* ** BEGIN add wordpress's classes ** */                
                 pageModel.at(0).attributes.bodyClass.forEach(function(thisClass){
                   $('body').addClass(thisClass);
                 });
-              /* ** END add wordpress's classes, of course ** */
+              /* ** END add wordpress's classes ** */
             }
           });
         /* *** END model replaces wordpress's information  *** */
@@ -403,11 +436,12 @@ $(function(){
               that.animateSection(singleId);
               that.mainMenu();
               that.singleUrl();
-              /* ** BEGIN add wordpress's classes, of course ** */                
+              that.searchActions();
+              /* ** BEGIN add wordpress's classes ** */                
                 pageModel.at(0).attributes.bodyClass.forEach(function(thisClass){
                   $('body').addClass(thisClass);
                 });
-              /* ** END add wordpress's classes, of course ** */
+              /* ** END add wordpress's classes ** */
             }
           });
         /* *** END model replaces wordpress's information  *** */
@@ -415,6 +449,106 @@ $(function(){
       }			
     }); 
     
+    var SearchView = Backbone.View.extend({
+      el: $('#main .maincontent'),
+      template: _.template($('#search-template').html()),
+      initialize: function(searchItem){
+        this.searchItem = searchItem;
+        this.render();
+      },
+      animateSection: function(searchItem){
+        /* * start definitions * */
+        /* * end definitions * */
+        /* ** start initial positions ** */
+        /* ** end initial positions ** */
+        /* *** start Animation *** */
+        /* *** end Animation *** */        
+      },
+      render: function(searchItem){
+        that = this;
+        $("body").removeClass();
+        $("body").addClass('search');
+        var $primary = $('#primary');
+        var $mainContent = $('#main div.maincontent');
+        if($primary.length!=0){$primary.hide();}
+        if($mainContent.length!=0){$mainContent.hide();}
+        var thisSearch;
+        /* *** BEGIN model replaces wordpress's information  *** */
+        var thisSearchString = '[{';
+          $.ajax({
+            url: '?ajax=true&s='+that.searchItem, // *+++++++++* Call the right page to return the JSon *+++++++++*
+            beforeSend : function(){ // *+++++++++* Create loading function *+++++++++*
+              //$('#some').css({'background': 'url(wp-content/themes/handknitted/img/ajax-loader.gif) no-repeat 5px center'});
+            }, 
+            success: function(data){ // *+++++++++* New model with the return data *+++++++++*
+              var resultsCont = 0;
+              var fixedString = "";
+              /* BEGIN count results */
+                var numbArticles = 0;
+                $(data).each(function(){
+                  if($(this).find('header').hasClass('entry-header')){
+                    numbArticles++;
+                  }
+                });
+              /* END count results */
+              //console.log($(data));
+              $(data).each(function(){
+                if($(this).hasClass('results_for')){
+                  fixedString = that.fixToValidJSon($(this));
+                  thisSearchString += '"resultsFor":"'+fixedString+'",'
+                }
+                if($(this).hasClass('title')){
+                  //fixedString = that.fixToValidJSon($(this));
+                  thisSearchString += '"title":"'+$(this).html()+'",'
+                }
+                if($(this).hasClass('body_classes')){
+                  $("body").addClass($(this).html());
+                }
+                if($(this).find('header').hasClass('entry-header')){
+                  var articleString = "";
+                  if(numbArticles>1){
+                    if(resultsCont==0){
+                      articleString = that.fixToValidJSon($(this));
+                      thisSearchString += '"results":["'+articleString+'",'
+                    }
+                    if(resultsCont==(numbArticles-1)){
+                      articleString = that.fixToValidJSon($(this));
+                      thisSearchString += '"'+articleString+'"]'
+                    }
+                    if(resultsCont>0 && resultsCont<(numbArticles-1)){
+                      articleString = that.fixToValidJSon($(this));
+                      thisSearchString += '"'+articleString+'",'
+                    }
+                    resultsCont++;
+                  }
+                  if(numbArticles==1){
+                    articleString = that.fixToValidJSon($(this));
+                    thisSearchString += '"results":["'+articleString+'"]'
+                  }
+                }
+                if($(this).attr('id')=='searchform'){ //Nothing Found?
+                  articleString = that.fixToValidJSon($(this));
+                  thisSearchString += '"results":["<h3>Nothing Found <br /></h3>'+articleString+'"]'
+                }
+              });
+              thisSearchString += '}]';
+              //console.log(thisSearchString);
+              thisSearch = $.parseJSON(thisSearchString);
+              searchModel = new pagesCollection([thisSearch]);
+              //console.log(searchModel);
+              that.$el.html(that.template(searchModel), that.searchItem);
+              $('#main div.maincontent').show();
+              that.animateSection(searchItem);
+              that.mainMenu();
+              that.singleUrl();
+              that.searchActions();
+            }
+          });
+        /* *** END model replaces wordpress's information  *** */
+        return this;
+      }			
+    }); 
+        
   /* ROUTERS */
     var AppRouter = Backbone.Router.extend({
       routes: {
@@ -423,6 +557,7 @@ $(function(){
         "about": "about",
         "page/:pageId": "page",
         "single/:singleId": "single",
+        "search/:searchItem": "search",
         //"content/:idAttribute/articles/:idArticle": "article", // example
         "*actions": "home"
       }, 
@@ -440,6 +575,9 @@ $(function(){
       },
       single: function(singleId){
         new SingleView(singleId);
+      },
+      search: function(searchItem){
+        new SearchView(searchItem);
       }/* // example
       article: function(idAttribute, idArticle){
         new ContentView(idAttribute, idArticle);

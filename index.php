@@ -42,14 +42,13 @@ header('Access-Control-Allow-Origin: *');
       <div id="primary">
         <div id="content">
           <?php get_template_part( 'loop', 'index' ); ?>
-          <% <!-- console.log(homeJSon --> %>
         </div> <!-- #content -->
       </div> <!-- #primary -->
     </script>
 
     <!-- *************** INDEX ******************************************************** -->
     <script type="text/html" id="index-template">
-      <div class="index-container row">
+      <div class="index-container">
         <?php wp_nav_menu( array ("container" => false) ); ?>
         <div class="gallery_header menu_header_index">
           
@@ -87,7 +86,7 @@ header('Access-Control-Allow-Origin: *');
     <!-- *************** ABOUT ********************************************************** -->
     <script type="text/html" id="about-template">
       <nav class="page_nav">You are here - <%= get("nombre") %></nav>
-      <div class="about_container row">
+      <div class="about_container">
         <div class="content span12">
           <div class ="title span9">
             <h1><%= get("title") %></h1>
@@ -124,7 +123,7 @@ header('Access-Control-Allow-Origin: *');
           if(thisPages.pages[0].slug == ""){ %>      
             <nav class="page_nav">You are here - <span><%= pageModel.at(0).attributes.title %></span></nav>
             <div class="content">
-              <div class="inner_content <%= pageModel.at(0).attributes.slug %> row">
+              <div class="inner_content <%= pageModel.at(0).attributes.slug %>">
                 <h2 class="title"><%= pageModel.at(0).attributes.title %></h2>
                 <div class="page_content">
                   <%= pageModel.at(0).attributes.content %>
@@ -161,7 +160,7 @@ header('Access-Control-Allow-Origin: *');
             </div>  
             <% _.each(thisPages.pages, function(thisPage){ %>
               <div class="">
-                <div class="inner_content <%= thisPage.slug %> row">
+                <div class="inner_content <%= thisPage.slug %>">
                   <h2 class="subpage_title"><%= thisPage.title %></h2>
                   <div class="content_subpage"><%= thisPage.content %></div>
                   <!-- BEGIN show all custom fields -->
@@ -194,7 +193,7 @@ header('Access-Control-Allow-Origin: *');
           thisPages = pageModel.at(0).attributes; %>      
             <nav class="page_nav">You are here - <span><%= pageModel.at(0).attributes.title %></span></nav>
             <div class="content">
-              <div class="inner_content <%= pageModel.at(0).attributes.slug %> row">
+              <div class="inner_content <%= pageModel.at(0).attributes.slug %>">
                 <h2 class="title"><%= pageModel.at(0).attributes.title %></h2>
                 <div class="page_content">
                   <%= pageModel.at(0).attributes.content %>
@@ -216,8 +215,31 @@ header('Access-Control-Allow-Origin: *');
       </div>
     </script>
 
+    <!-- *************** SEARCH ******************************************************* -->
+    <script type="text/html" id="search-template">        
+        <!-- ******************* -->
+        <!-- *** please note *** --> 
+        <!-- ******************* -->        
+        <!--<% searchModel.at(0).attributes[0]; %> // Call all current JSon data -->
+      <div class="single_container">
+        <%
+          thisSearch = searchModel.at(0).attributes[0];
+          %>      
+            <nav class="page_nav">You are here - <span><%= thisSearch.title %></span></nav>
+            <div class="content">
+              <div class="inner_content">
+                <h2 class="title"><%= thisSearch.title %></h2>
+                <div class="page_content">
+                  <%= thisSearch.resultsFor %>
+                  <%= thisSearch.results %>
+                </div>
+              </div>
+            </div>
+      </div>
+    </script>
+
     <!-- *************** FOOTER ********************************************************* -->
     <?php get_footer();
  
-  }
+  } //end else
 ?>

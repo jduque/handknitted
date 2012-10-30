@@ -12,7 +12,6 @@ if($_GET['ajax']){
       the_post();
       $the_content = get_the_content();
       $the_title = get_the_title();
-      $search = get_search_form(false);
     endwhile;
   endif;
   $myPost=get_post($ID);
@@ -22,7 +21,6 @@ if($_GET['ajax']){
   $pages['slug']=$myPost->post_name;
   $pages['custom']=get_post_custom($ID);
   $pages['bodyClass']=get_body_class();
-  $pages['search']=$search;
   $subpages=get_pages(array('child_of'=>$ID,'post_type'=>'page','post_status' =>'publish'));
   $count=0;
   if($subpages!=null){

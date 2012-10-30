@@ -30,3 +30,4 @@ var homeJSon = new pagesCollection(
 ]
 );
 var pageModel = new pagesCollection([]);
+var searchModel = new pagesCollection([]);

@@ -12,7 +12,6 @@ if($_GET['ajax']){
       the_post();
       $the_content = get_the_content();
       $the_title = get_the_title();
-      $search = get_search_form(false);
     endwhile;
   endif;
   $myPost=get_post($ID);

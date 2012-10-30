@@ -99,7 +99,7 @@
       <% pageModel.at(0).attributes.customName; %> //example custom, where customName is the name of the custom field 
     */
     -->
-<div class="page_container">
+  <div class="page_container">
     <%
       thisPages = pageModel.at(0).attributes;
       if(thisPages.pages[0].slug == ""){ %>      
