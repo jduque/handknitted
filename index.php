@@ -127,7 +127,6 @@ header('Access-Control-Allow-Origin: *');
                 <h2 class="title"><%= pageModel.at(0).attributes.title %></h2>
                 <div class="page_content">
                   <%= pageModel.at(0).attributes.content %>
-                  <%= pageModel.at(0).attributes.search %>
                 </div>
                 <!-- BEGIN show all custom fields -->
                 <% 
@@ -197,7 +196,6 @@ header('Access-Control-Allow-Origin: *');
                 <h2 class="title"><%= pageModel.at(0).attributes.title %></h2>
                 <div class="page_content">
                   <%= pageModel.at(0).attributes.content %>
-                  <%= pageModel.at(0).attributes.search %>
                 </div>
                 <!-- BEGIN show all custom fields -->
                 <% 
@@ -232,6 +230,30 @@ header('Access-Control-Allow-Origin: *');
                 <div class="page_content">
                   <%= thisSearch.resultsFor %>
                   <%= thisSearch.results %>
+                </div>
+              </div>
+            </div>
+      </div>
+    </script>
+
+
+    <!-- ***************  ARCHIVE ******************************************************* -->
+    <script type="text/html" id="archive-template">        
+        <!-- ******************* -->
+        <!-- *** please note *** --> 
+        <!-- ******************* -->        
+        <!--<% archiveModel.at(0).attributes[0]; %> // Call all current JSon data -->
+      <div class="single_container">
+        <%
+          thisArchive = archiveModel.at(0).attributes[0];
+          %>      
+            <nav class="page_nav">You are here - <span><%= thisArchive.title %></span></nav>
+            <div class="content">
+              <div class="inner_content">
+                <h2 class="title"><%= thisArchive.title %></h2>
+                <div class="page_content">
+                  <%= thisArchive.resultsFor %>
+                  <%= thisArchive.results %>
                 </div>
               </div>
             </div>
