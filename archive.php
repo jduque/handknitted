@@ -21,8 +21,7 @@ if($_GET['ajax']){
   $classes = get_body_class();  
   foreach ($classes as $i => $value) {
     printf( "%s", "<div class='body_classes'>" . $classes[$i] . "</div>" );  
-  } 
-  //echo json_encode($search);  
+  }
 }
 else{
 get_header(); ?>
