@@ -4,6 +4,7 @@ $(function(){
     url: '/ImagesCollection/'
   });
   
+  
   /* HELPRES */
   _.extend(Backbone.View.prototype, {
     //helpersExample: function(){},
