@@ -72,7 +72,7 @@ $(function(){
     },
     /* *** BEGIN helper to make a valid JSon *** */
     fixToValidJSon: function($jqueryObj){
-      var jqueryObjString = $("<div>").append($jqueryObj.clone()).html().replace(/"/g,"'");
+      var jqueryObjString = $("<div>").append($jqueryObj.clone()).html().replace(/"/g,"");
       jqueryObjString = jqueryObjString.replace( /(\t)/g,"");
       jqueryObjString = jqueryObjString.replace( /(\n)/g,"");
       return jqueryObjString;
@@ -442,8 +442,7 @@ $(function(){
       },
       render: function(pageId){
         that = this;
-        $("body").removeClass();
-        $("body").addClass('page');
+        $("body").attr('class','page');
         $primary = $('#primary');
         if($('#primary').length!=0){
           $primary.hide();
@@ -465,10 +464,10 @@ $(function(){
               that.singleUrl();
               that.archiveUrlHelper();
               that.searchActions();
-              /* ** BEGIN add wordpress's classes ** */                
-                pageModel.at(0).attributes.bodyClass.forEach(function(thisClass){
-                  $('body').addClass(thisClass);
-                });
+            },
+            complete: function(){
+              /* ** BEGIN add wordpress's classes ** */
+                $('body').attr('class','page '+pageModel.at(0).attributes.bodyClass.toString().replace(/,/g,' '));
               /* ** END add wordpress's classes ** */
             }
           });
@@ -494,8 +493,7 @@ $(function(){
       },
       render: function(singleId){
         that = this;
-        $("body").removeClass();
-        $("body").addClass('single');
+        $("body").attr('class', 'single');
         $primary = $('#primary');
         if($('#primary').length!=0){
           $primary.hide();
@@ -517,10 +515,10 @@ $(function(){
               that.singleUrl();
               that.archiveUrlHelper();
               that.searchActions();
-              /* ** BEGIN add wordpress's classes ** */                
-                pageModel.at(0).attributes.bodyClass.forEach(function(thisClass){
-                  $('body').addClass(thisClass);
-                });
+            },
+            complete: function(){
+              /* ** BEGIN add wordpress's classes ** */
+                $('body').attr('class','single '+pageModel.at(0).attributes.bodyClass.toString().replace(/,/g,' '));
               /* ** END add wordpress's classes ** */
             }
           });
@@ -561,7 +559,7 @@ $(function(){
               //$('#some').css({'background': 'url(wp-content/themes/handknitted/img/ajax-loader.gif) no-repeat 5px center'});
             }, 
             success: function(data){ // *+++++++++* New model with the return data *+++++++++*
-              var thisSearchString = that.createJSon(data);
+              var thisSearchString = that.createJSon(data);              
               thisSearch = $.parseJSON(thisSearchString);
               searchModel = new pagesCollection([thisSearch]);
               //console.log(searchModel);
@@ -617,9 +615,21 @@ $(function(){
             beforeSend : function(){ // *+++++++++* Create loading function *+++++++++*
               //$('#some').css({'background': 'url(wp-content/themes/handknitted/img/ajax-loader.gif) no-repeat 5px center'});
             }, 
-            success: function(data){ // *+++++++++* New model with the return data *+++++++++*
+            success: function(data){ // *+++++++++* New model with the return data *+++++++++*              
+              var thatData = data;
+              $.ajax({
+                url: 'wp-content/themes/handknitted/js_encode.php?string='+thatData, // *+++++++++* Call the right page to return the JSon *+++++++++*
+                beforeSend : function(){ // *+++++++++* Create loading function *+++++++++*
+                  //$('#some').css({'background': 'url(wp-content/themes/handknitted/img/ajax-loader.gif) no-repeat 5px center'});
+                }, 
+                success: function(data){ // *+++++++++* New model with the return data *+++++++++*
+                  console.log(data);
+                }
+              });
               var thisSearchString = that.createJSon(data);
-              thisSearch = $.parseJSON(thisSearchString);
+              console.log('before parseJSON');
+              thisSearch = $.parseJSON(thisSearchString.toString());
+              console.log('after parseJSON');
               archiveModel = new pagesCollection([thisSearch]);
               that.$el.html(that.template(archiveModel), that.archiveItem, that.weekItem);
               $('#main div.maincontent').show();
