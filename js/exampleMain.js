@@ -442,7 +442,7 @@ $(function(){
       },
       render: function(pageId){
         that = this;
-        $("body").attr('class','page');
+        $("body").attr('class','page'); 
         $primary = $('#primary');
         if($('#primary').length!=0){
           $primary.hide();
