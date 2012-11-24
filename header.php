@@ -79,4 +79,4 @@
 		</header><!-- #branding -->
 	
 	
-		<div id="main">
+		<div id="wp_main">
