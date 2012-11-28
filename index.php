@@ -6,20 +6,22 @@ header('Access-Control-Allow-Origin: *');
  */
   $cont = 0;
   if($_GET['ajax']==true){
+    global $more;    // Declare global $more (before the loop).
+    $more = 0;       // Set (inside the loop) to display content above the more tag.
     if ( have_posts() ) : 
       while ( have_posts() ) : 
         the_post();
-        $home[$cont]['content'] = get_the_content();
+        $home[$cont]['content'] = apply_filters('the_content',get_the_content());
+        $home[$cont]['title']=get_the_title();
         $ID = get_the_ID();
+      endwhile;
+    endif;
         $myPost=get_post($ID);
         $home[$cont]['idAttribute']=$ID;
-        $home[$cont]['title']=get_the_title();
         $home[$cont]['slug']=$myPost->post_name;
         $home[$cont]['custom']=get_post_custom($ID);
         $home[$cont]['bodyClass']=get_body_class();
         $cont++;
-      endwhile;
-    endif;
     echo json_encode($home);
   }
   else{ ?>
@@ -38,11 +40,27 @@ header('Access-Control-Allow-Origin: *');
     </div>
 
     <!-- *************** HOME *********************************************************** -->
-    <script type="text/html" id="home-template">      
+    <script type="text/html" id="home-template">
       <div id="primary">
+        <header id="branding" role="banner">
+            <hgroup>
+              <h1 id="site-title"><span><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></h1>
+              <h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
+            </hgroup>				
+            <!--<nav id="utility" role="article">
+              <?php //wp_nav_menu( array( 'theme_location' => 'utility' ) ); ?>
+            </nav><!-- #utility -->
+            <!--<div class="search"><?php //get_search_form(); ?></div>	-->
+            <nav id="access" role="article">
+              <h1 class="section-heading"><?php _e( 'Main menu', 'themename' ); ?></h1>
+              <div class="skip-link visuallyhidden"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'themename' ); ?>"><?php _e( 'Skip to content', 'themename' ); ?></a></div>
+              <?php wp_nav_menu( array('menu' => 'Top')); ?>
+            </nav><!-- #access -->
+        </header><!-- #branding -->
         <div id="content">
           <?php get_template_part( 'loop', 'index' ); ?>
         </div> <!-- #content -->
+        <div class="next_slide"><p>next</p></div>
       </div> <!-- #primary -->
     </script>
 
@@ -118,6 +136,7 @@ header('Access-Control-Allow-Origin: *');
         <!--<% pageModel.at(0).attributes; %> // Call all current JSon data -->
         <!--<% pageModel.at(0).attributes.customName; %> //example custom, where customName is the name of the custom field -->
     <div class="page_container">
+      <div class="prev_slide"><p>prev</p></div>
         <%
           thisPages = pageModel.at(0).attributes;
           if(thisPages.pages[0].slug == ""){ %>      
@@ -177,6 +196,7 @@ header('Access-Control-Allow-Origin: *');
               </div>
             <% });  %> <!-- END _.each -->
         <% } %> <!-- END else -->
+        <div class="next_slide"><p>next</p></div>
       </div>
     </script>
 
@@ -187,6 +207,7 @@ header('Access-Control-Allow-Origin: *');
         <!-- ******************* -->        
         <!--<% pageModel.at(0).attributes; %> // Call all current JSon data -->
         <!--<% pageModel.at(0).attributes.customName; %> //example custom, where customName is the name of the custom field -->
+        <% $("body").attr("class",pageModel.at(0).attributes.bodyClass.toString().replace(/,/g," ")); %>
       <div class="single_container">
         <%
           thisPages = pageModel.at(0).attributes; %>      
