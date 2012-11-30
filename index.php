@@ -24,9 +24,8 @@ header('Access-Control-Allow-Origin: *');
         $cont++;
     echo json_encode($home);
   }
-  else{ ?>
-    <!-- *************** HEADER ********************************************************* -->
-    <?php get_header(); ?>
+  else{ 
+    get_header(); ?>
 
     <!-- *************** MAIN *********************************************************** -->
     <div id="main" role="main" class="clearfix">
