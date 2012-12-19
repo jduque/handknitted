@@ -28,7 +28,7 @@ if($_GET['ajax']){
       $page_id = $page->ID;
       $subpage[$count]['subpageId']=$page_id;
       $subpage[$count]['title']=$page->post_title;
-      $subpage[$count]['content']=$page->post_content;
+      $subpage[$count]['content']=apply_filters('the_content',$page->post_content);
       $subpage[$count]['slug']=$page->post_name;
       $subpage[$count]['custom']=get_post_custom($page_id);
       $count++;
