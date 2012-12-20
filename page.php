@@ -27,10 +27,21 @@ if($_GET['ajax']){
     foreach($subpages as $page){
       $page_id = $page->ID;
       $subpage[$count]['subpageId']=$page_id;
-      $subpage[$count]['title']=$page->post_title;
-      $subpage[$count]['content']=apply_filters('the_content',$page->post_content);
+      $subpage[$count]['title']=$page->post_title;      
       $subpage[$count]['slug']=$page->post_name;
       $subpage[$count]['custom']=get_post_custom($page_id);
+      /* BEGIN secondary loop to run plugins on subpages */
+      // The Query
+        $the_query = new WP_Query('page_id='.$page_id);
+      // The Loop
+        while ( $the_query->have_posts() ) :
+          $the_query->the_post();
+          $subpage[$count]['content']= apply_filters('the_content',get_the_content());
+        endwhile;
+      // Restore original Query & Post Data
+        wp_reset_query();
+        wp_reset_postdata();
+      /* BEGIN secondary loop to run plugins on subpages */
       $count++;
     }
   }
