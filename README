@@ -1,16 +1,65 @@
 #  Handknitted Handcrafted Backbone Engine
+ _   _                 _ _          _ _   _           _ 
+| | | | __ _ _ __   __| | | ___ __ (_) |_| |_ ___  __| |
+| |_| |/ _` | '_ \ / _` | |/ / '_ \| | __| __/ _ \/ _` |
+|  _  | (_| | | | | (_| |   <| | | | | |_| ||  __/ (_| |
+|_| |_|\__,_|_| |_|\__,_|_|\_\_| |_|_|\__|\__\___|\__,_|
+
+
+                                                                                                                   
+                                                                                                                                                                                                          
+                                                      ddddd                                                                                             dddd
+HHHHH   HHHHH                                         d:::dkkkkkk                           ii        tt           tt                                   d::d
+H:::H   H:::H                                         d:::dk::::k                          i::i    ttt:t        ttt:t                                   d::d
+H:::H   H:::H                                         d:::dk::::k                           ii     t:::t        t:::t                                   d::d
+HH::H   H::HH                                         d:::d k::::k                                  t::t        t:::t                                   d::d 
+  H:H   H:H    aaaaaaaaaaa  nnn  nnnnnnn       dddddddd:::d  k:::k    kkkkkknnn nnnnnnnn   iiiiittttt:::tttttttttt:::ttttttt      eeeeeeee      ddddddddd::d 
+  H:H   H:H    a::::::::::a n::nn:::::::n    dd:::::::::::d  k:::k   k::::k n::n::::::::n  i:::it:::::::::::tt:::::::::::::t    ee:::::::::e  dd:::::::::::d 
+  H::HHH::H    aaaaaaaaa:::an:::::::::::nn  d:::::::::::::d  k:::k  k::::k  n:::::::::::nn  i::it:::::::::::tt:::::::::::::t   e::::eeee::::e d::::::::::::d 
+  H:::::::H             a::ann::::::::::::nd::::::ddddd:::d  k:::k k::::k   nn::::::::::::n i::itttt:::::tttttttt:::::tttttt  e::::e    e:::ed:::::::ddddd:d 
+  H:::::::H      aaaaaaa:::a  n::::nnnn:::nd:::::d    d:::d  k::::k::::k      n:::nnnn::::n i::i    t:::t        t:::t        e:::::eeee::::ed::::::d    d:d 
+  H::HHH::H    aa::::::::::a  n:::n    n::nd::::d     d:::d  k::::::::k       n::n    n:::n i::i    t:::t        t:::t        e:::::::::::::ee:::::d      dd 
+  H:H   H:H   a::::aaaa::::a  n:::n    n::nd::::d     d:::d  k::::::::k       n::n    n:::n i::i    t:::t        t:::t        e::::eeeeeeeeeed:::::d     d:d 
+  H:H   H:H  a::::a    a:::a  n:::n    n::nd::::d     d:::d  k::::k::::k      n::n    n:::n i::i    t:::t  ttttt t:::t    tttte:::::e        d:::::d     d:d 
+HH::H   H::HHa::::a    a:::a  n:::n    n::nd:::::ddddd::::ddk::::k k::::k     n::n    n:::ni::::i   t::::tt::::t t::::tttt:::te::::::e       d::::::ddddd::d
+H:::H   H:::Ha:::::aaaa::::a  n:::n    n::n d::::::::::::::dk::::k  k::::k    n::n    n:::ni::::i   tt:::::::::t tt::::::::::t e::::::eeeeeee d::::::::::::d
+H:::H   H:::H a::::::::::a::a n:::n    n::n  d::::::::ddd::dk::::k   k::::k   n::n    n:::ni::::i     t:::::::t   tt::::::::t  ee::::::::::e  d:::::::::dddd
+HHHHH   HHHHH  aaaaaaaaaa aaa nnnnn    nnnn   dddddddd   dddkkkkkk    kkkkkk  nnnn    nnnnniiiiii     ttttttttt     tttttttt      eeeeeeeee    dddddddd   dd
 
 ## Changelog
 
-### v 0.1.0 : October 31th, 2012
+### v 0.1.0 : October 31, 2012
+### v 0.1.4 : January 08, 2013
 
-
-## Recent Changes (0.1.0)
+## Changes (0.1.0)
 
 1. Initial Handknitted release
 
+## Changes (0.1.4)
+
+1. Fix IE9 errors
+
 ## Summary
 
+Handknitted is the union of Backbone JS and the starter theme called Handcrafted 
+created to Wordpress.
+Create interactive web using Ajax calls and information in JavaScript Object Notation (JSon).
+This information can be managed easily from a WYSIWYG editor thanks to functionality through 
+content manager (CMS) Wordpress.
+Lets then just copy and paste information, links, videos, images and other in Wordpress; 
+create a database moved from the pages of Wordpres in JSON format to work it with Backbone JS 
+and display to the end-user without reloading the page creating that sense of interactivity on the web.
+
+## Install
+
+1- Download zip and extract folder.
+2- Copy folder to theme folder in Wordpress.
+3- Go to wp-admin in your Wordpress page.
+4- Then go to Appearance/themes
+5- And just active Handknitted Theme.
+6- Enjoy it!
+
+## 5-line code snippet on how its used
 
 ## License:
 
