@@ -68,7 +68,8 @@ http://www.activomultimedia.com/handknitted/
 ## About Views (Backbone JS)
 
 ** The Views is in handknitted/js/exampleMain.js
-** Where put your code? Inside View (example HomeView) look for the key "render" --> render: function(){}
+** Where put your code? Inside View (example HomeView) look for 
+   the key "render" --> render: function(){}
    and go to key "success" inside the ajax call,
    The dom elements are written after the call "that.$el.append(that.template(someJSon))".
    Now you can put your code here!. //jQuery, JS, Bakbone JS, call php pages using ajax
