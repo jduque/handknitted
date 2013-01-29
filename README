@@ -5,11 +5,11 @@
  '¦:.   '¦:. '/¯¯¯¯\      '/¯¯;¦\  '\  °  ¦:. ’  ‚¦\\¦¯¯¯¯¯¯\  ¦¯¯¯¯¯¦\¯¯¯¯¯\„             
  '¦:.    /¦_¦\      ¦     /    ¦_\  '\‚’  ¦:.     '\'\     '¦  ¦:.  '¦ ¦:.  '\ °           
  '¦:.    \¦¯¦/      ¦    /    /¦¯¦\   \’‚°¦:.      ¦ ¦:.    ¦  ¦:.  '¦ ¦:.    \ ‚          
- '¦:.     ¦.¦:‚     ¦   ¦:.  '\¦.¦/   '\° ¦:.      ¦ ¦:.    ¦  ¦:.  '¦ ¦:.    ¦            
+ '¦:.     ¦.¦:‚     ¦   ¦:.  '\¦.¦/   '\° ¦:.      ¦ ¦:.    ¦  ¦:.  '¦ ¦:.     ¦            
  '¦:.     ¦.¦:‚     ¦   ¦:.   '\'¦:.  '¦’ ¦:.      ¦ ¦:.    ¦  ¦:.  '¦ ¦:.    /¦           
  ¦\_____'/¦:¦\_____/¦°  ¦\______¦_____ /¦ /_______/'/______'/¦ ¦____¦/______/:'¦           
- ¦:¦::::¦:¦:¦:¦:::¦'¦’  ¦:¦:::'¦::::‚:¦'¦ ¦::::::¦ ¦::::‚:¦:'¦ ¦::::¦¦::::'¦:'/’’          
- '\¦::::¦/  '\¦::'¦/‘   '\¦::::'¦::::°¦/  ¦::’:::¦/¦:„::::¦:'/ ¦::::¦¦:::::'¦/             
+ ¦:¦::::¦:¦:¦:¦:::¦'¦’  ¦:¦::::'¦:::‚:¦'¦ ¦::::::¦'¦::::‚::¦'¦ ¦::::¦¦:::::'¦'/’’          
+ '\¦::::¦/  '\¦::'¦/‘   '\¦::::'¦::::°¦/  ¦::’:::¦/¦:„:::::¦'/ ¦::::¦¦:::::'¦/             
     ¯¯¯¯     '¯¯¯¯¯       ¯¯¯¯¯¯°¯¯¯¯¯    '¯¯¯¯¯¯¯  '¯¯¯¯¯¯¯’   ¯¯¯¯   ¯¯¯¯¯¯   ‚‚         
                      '‚             '                                                    ' 
 '      ‘                                                      '                         '
@@ -17,7 +17,7 @@
 °               \¯¯¯¯\        ¦\__/¦‚‚/¯¯¯¯¯¯¯¯¯¯\  /¯¯¯¯¯¯¯¯¯¯\      '¦\¯¯\     '      
 ¦\¯¯¯¯\'¦¯¯¯¯\‚‚ ¦. ‚¦\\¦¯¯\  ¦'¦¦'¦‚¦.       ”  ¦'¦.          ”¦ ¦\¯¯¯\/   ¦. ¦¯¯¯¦\¯¯\„ 
 '\¦.  ¦/__;__/¦  ¦.  '\'\  '¦ '\¦¦/  ¦\__/¦ ¦\___/¦¦\___/¦ ¦\__/¦ ¦¦  /¦___/¦. ¦. '¦¦. '\ °
- '¦.  ¦\¯¯¯¯'\'¦ ¦.   ¦ ¦.  ¦¦\¯¯¯\’ ¦':¦'¦ ¦.¦ ¦:¦¦ ¦¦:'¦ ¦.¦¦:¦'¦/'/¦¯¯¦¦/”  ¦. '¦¦.   \ ‚
+ '¦.  ¦\¯¯¯¯'\'¦ ¦.   ¦ ¦.  ¦¦\¯¯¯\’ ¦':¦'¦ ¦.¦ ¦:¦¦ ¦¦:'¦ ¦.¦¦:¦'¦/ /¦¯¯¦¦/”  ¦. '¦¦.   \ ‚
  '¦.  ¦ ¦.   '\  ¦.   ¦ ¦.  ¦ \\   \ '\¦¦/¦ ¦\¦'¦/ '\¦:¦/¦ ¦\¦'¦/'/ / ¦__¦. º‚ ¦. '¦¦.    ¦
  '¦.  ¦ ¦.   '¦° ¦.   ¦ ¦.  ¦  \¦. ¦'  ¯'/  '\¯¯’    ¯ '/  '\¯¯’ ¦. '¦'/¯¯¯¯\ „¦. '¦¦.   /¦
  /___/¦/_____/¦‚ /___/'/__'/¦   ¦. ¦„   ¦\___/¦        ¦\___/¦   ¦\__¦/_____/¦„¦___¦/___/:¦
@@ -52,6 +52,10 @@ Lets then just copy and paste information, links, videos, images and other in Wo
 create a database moved from the pages of Wordpres in JSON format to work it with Backbone JS 
 and display to the end-user without reloading the page creating that sense of interactivity on the web.
 
+## Demo
+
+http://www.activomultimedia.com/handknitted/
+
 ## Install
 
 1- Download zip and extract folder.
@@ -61,8 +65,16 @@ and display to the end-user without reloading the page creating that sense of in
 5- And just active Handknitted Theme.
 6- Enjoy it!
 
-## 5-line code snippet on how its used
+## About Views (Backbone JS)
 
+** The Views is in handknitted/js/exampleMain.js
+** Where put your code? Inside View (example HomeView) look for the key "render" --> render: function(){}
+   and go to key "success" inside the ajax call,
+   The dom elements are written after the call "that.$el.append(that.template(someJSon))".
+   Now you can put your code here!. //jQuery, JS, Bakbone JS, call php pages using ajax
+** Tip: You can call any View inside the View where you write your code
+** You can learn Backbone JS from the page http://backbonejs.org/
+   
 ## License:
 
 Major components:
