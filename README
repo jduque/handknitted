@@ -39,12 +39,12 @@
 
 ## Changes (0.1.4)
 
-1. Fix IE9 errors
+1. Fix IE9 bugs
 
 ## Summary
 
 Handknitted is the union of Backbone JS and the starter theme called Handcrafted 
-created to Wordpress.
+created for Wordpress.
 Create interactive web using Ajax calls and information in JavaScript Object Notation (JSon).
 This information can be managed easily from a WYSIWYG editor thanks to functionality through 
 content manager (CMS) Wordpress.
